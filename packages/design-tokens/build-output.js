@@ -1,4 +1,4 @@
-import { register } from "@tokens-studio/sd-transforms";
+import {register} from "@tokens-studio/sd-transforms";
 import StyleDictionary from "style-dictionary";
 
 register(StyleDictionary);
@@ -91,143 +91,168 @@ StyleDictionary.registerTransform({
 });
 
 const sd = new StyleDictionary({
-  source: ["input/tokens.json"],
-  preprocessors: ["tokens-studio"],
-  log: {
-    verbosity: "verbose",
-  },
-  platforms: {
-    css: {
-      transformGroup: "tokens-studio",
-      transforms: [
-        "bcds/typography/italic",
-        "bcds/color/uppercase",
-        "bcds/css/size/zero",
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/size/lineheight",
-        "ts/typography/fontWeight",
-        "ts/resolveMath",
-        "ts/size/css/letterspacing",
-        "ts/color/css/hexrgba",
-        "ts/color/modifiers",
-        "name/kebab",
-      ],
-      buildPath: "build/css/",
-      files: [
-        {
-          destination: "variables.css",
-          format: "css/variables",
-        },
-      ],
+    source: ["input/tokens.json"],
+    preprocessors: ["tokens-studio"],
+    log: {
+      verbosity: "verbose",
     },
-    cssPrefixed: {
-      transformGroup: "tokens-studio",
-      prefix: "bcds",
-      transforms: [
-        "bcds/typography/italic",
-        "bcds/color/uppercase",
-        "bcds/css/size/zero",
-        "ts/descriptionToComment",
-        "ts/size/px",
-        "ts/opacity",
-        "ts/size/lineheight",
-        "ts/typography/fontWeight",
-        "ts/resolveMath",
-        "ts/size/css/letterspacing",
-        "ts/color/css/hexrgba",
-        "ts/color/modifiers",
-        "name/kebab",
-      ],
-      buildPath: "build/css-prefixed/",
-      files: [
-        {
-          destination: "variables.css",
-          format: "css/variables",
-        },
-      ],
+    platforms: {
+      css: {
+        transformGroup: "tokens-studio",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/css/size/zero",
+          "ts/descriptionToComment",
+          "ts/size/px",
+          "ts/opacity",
+          "ts/size/lineheight",
+          "ts/typography/fontWeight",
+          "ts/resolveMath",
+          "ts/size/css/letterspacing",
+          "ts/color/css/hexrgba",
+          "ts/color/modifiers",
+          "name/kebab",
+        ],
+        buildPath: "build/css/",
+        files: [
+          {
+            destination: "variables.css",
+            format: "css/variables",
+          },
+        ],
+      },
+      cssPrefixed: {
+        transformGroup: "tokens-studio",
+        prefix: "bcds",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/css/size/zero",
+          "ts/descriptionToComment",
+          "ts/size/px",
+          "ts/opacity",
+          "ts/size/lineheight",
+          "ts/typography/fontWeight",
+          "ts/resolveMath",
+          "ts/size/css/letterspacing",
+          "ts/color/css/hexrgba",
+          "ts/color/modifiers",
+          "name/kebab",
+        ],
+        buildPath: "build/css-prefixed/",
+        files: [
+          {
+            destination: "variables.css",
+            format: "css/variables",
+          },
+        ],
+      },
+      js: {
+        transformGroup: "tokens-studio",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/js/size/zero",
+        ],
+        buildPath: "build/js/",
+        files: [
+          {
+            destination: "index.js",
+            format: "javascript/es6",
+          },
+          {
+            destination: "index.d.ts",
+            format: "typescript/es6-declarations",
+          },
+        ],
+      },
+      jsPrefixed: {
+        transformGroup: "tokens-studio",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/js/size/zero",
+        ],
+        prefix: "bcds",
+        buildPath: "build/js-prefixed/",
+        files: [
+          {
+            destination: "index.js",
+            format: "javascript/es6",
+          },
+          {
+            destination: "index.d.ts",
+            format: "typescript/es6-declarations",
+          },
+        ],
+      },
+      cjs: {
+        transformGroup: "tokens-studio",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/js/size/zero",
+        ],
+        buildPath: "build/cjs/",
+        files: [
+          {
+            destination: "index.js",
+            format: "javascript/module-flat",
+          },
+          {
+            destination: "index.d.ts",
+            format: "typescript/es6-declarations",
+          },
+        ],
+      },
+      cjsPrefixed: {
+        transformGroup: "tokens-studio",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/js/size/zero",
+        ],
+        prefix: "bcds",
+        buildPath: "build/cjs-prefixed/",
+        files: [
+          {
+            destination: "index.js",
+            format: "javascript/module-flat",
+          },
+          {
+            destination: "index.d.ts",
+            format: "typescript/es6-declarations",
+          },
+        ],
+      },
+      scss: {
+        transformGroup: "tokens-studio",
+        transforms: [
+          "bcds/typography/italic",
+          "bcds/color/uppercase",
+          "bcds/css/size/zero",
+          "name/kebab",
+        ],
+        buildPath: "build/scss/",
+        files: [
+          {
+            destination: "variables.scss",
+            format: "scss/map-deep",
+            filter: (t) => (
+              /* strip metadata */
+              !(['$themes', '$metadata'].includes(t))
+            ),
+            options: {
+              "mapName": "bcds",
+              "themeable": false
+            }
+          },
+        ],
+      },
     },
-    js: {
-      transformGroup: "tokens-studio",
-      transforms: [
-        "bcds/typography/italic",
-        "bcds/color/uppercase",
-        "bcds/js/size/zero",
-      ],
-      buildPath: "build/js/",
-      files: [
-        {
-          destination: "index.js",
-          format: "javascript/es6",
-        },
-        {
-          destination: "index.d.ts",
-          format: "typescript/es6-declarations",
-        },
-      ],
-    },
-    jsPrefixed: {
-      transformGroup: "tokens-studio",
-      transforms: [
-        "bcds/typography/italic",
-        "bcds/color/uppercase",
-        "bcds/js/size/zero",
-      ],
-      prefix: "bcds",
-      buildPath: "build/js-prefixed/",
-      files: [
-        {
-          destination: "index.js",
-          format: "javascript/es6",
-        },
-        {
-          destination: "index.d.ts",
-          format: "typescript/es6-declarations",
-        },
-      ],
-    },
-    cjs: {
-      transformGroup: "tokens-studio",
-      transforms: [
-        "bcds/typography/italic",
-        "bcds/color/uppercase",
-        "bcds/js/size/zero",
-      ],
-      buildPath: "build/cjs/",
-      files: [
-        {
-          destination: "index.js",
-          format: "javascript/module-flat",
-        },
-        {
-          destination: "index.d.ts",
-          format: "typescript/es6-declarations",
-        },
-      ],
-    },
-    cjsPrefixed: {
-      transformGroup: "tokens-studio",
-      transforms: [
-        "bcds/typography/italic",
-        "bcds/color/uppercase",
-        "bcds/js/size/zero",
-      ],
-      prefix: "bcds",
-      buildPath: "build/cjs-prefixed/",
-      files: [
-        {
-          destination: "index.js",
-          format: "javascript/module-flat",
-        },
-        {
-          destination: "index.d.ts",
-          format: "typescript/es6-declarations",
-        },
-      ],
-    },
-  },
-});
+  })
+;
 
 await sd.cleanAllPlatforms();
 await sd.buildAllPlatforms();
